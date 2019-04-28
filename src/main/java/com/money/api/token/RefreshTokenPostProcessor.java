@@ -13,8 +13,10 @@ import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+@ControllerAdvice
 public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2AccessToken> {
 
 	@Override
@@ -34,12 +36,12 @@ public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2Acces
 		
 		String refreshToken = body.getRefreshToken().getValue();
 		adicionarRefreshTokenNoCookie(refreshToken, req, resp);		
-		removerRegreshTokenDoBody(token);
+		removerRefreshTokenDoBody(token);
 		
 		return body;
 	}
 
-	private void removerRegreshTokenDoBody(DefaultOAuth2AccessToken token) {
+	private void removerRefreshTokenDoBody(DefaultOAuth2AccessToken token) {
 		token.setRefreshToken(null);
 	}
 
