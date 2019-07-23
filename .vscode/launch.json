@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-MoneyApiApplication<money-api>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.money.api.MoneyApiApplication",
+            "projectName": "money-api",
+            "args": ""
+        }
+    ]
+}
