@@ -20,17 +20,17 @@ import javax.validation.constraints.NotNull;
 public class Lancamento {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotNull
 	private String descricao;
 	
 	@NotNull
-	@Column(name="datavencimento")
+	@Column(name = "datavencimento")
 	private LocalDate dataVencimento;
 	
-	@Column(name="datapagamento")
+	@Column(name = "datapagamento")
 	private LocalDate dataPagamento;
 	
 	@NotNull
