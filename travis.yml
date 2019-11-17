@@ -1,5 +1,6 @@
 language: bash
-services: docker
+services: 
+    - docker
 before_install:
     - cd application/
     - echo "We are in the Docker folder!"
@@ -10,8 +11,8 @@ before_deploy:
 deploy:
     provider: script
     script:
-        docker push danparanhos/db-money;
-        docker push danparanhos/api-money;
+        - docker push danparanhos/db-money
+        - docker push danparanhos/api-money
     on:
         branch: master
 notifications:
