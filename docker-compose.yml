@@ -1,0 +1,42 @@
+version: '3.4'
+services: 
+  db:
+    image: danparanhos/db-money
+    restart: always
+    build: 
+        context: .
+        dockerfile: Dockerfile
+    environment:
+        TZ: America/Fortaleza
+        POSTGRES_PASSWORD: docker
+        POSTGRES_USER: docker
+        POSTGRES_DB: money
+    ports:
+        - "5432:5432"
+    networks: 
+        - money_api
+  money_api:
+    image: danparanhos/api-money
+    restart: always
+    build: ./application
+    working_dir: /application
+    environment:
+        TZ: America/Fortaleza
+        SPRING_BOOT_ENVIRONMENT: Production
+    volumes:
+        - ./application:/application
+        - ~/.m2:/root/.m2
+    expose:
+        - 8080
+    ports:
+        - "8080:8080"
+    command: mvn clean spring-boot:run
+    links:
+        - db
+    depends_on:
+        - db
+    networks:
+        - money_api
+networks:
+    money_api:
+        driver: bridge
